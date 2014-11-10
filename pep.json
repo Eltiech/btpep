@@ -1,0 +1,10 @@
+,
+	{
+        title:'Playlist Enhancement Plugin',
+        desc:'Set one-time or recurring alarms for upcoming/favorite playlist items! View estimated play times! Copy video links to the clipboard!',
+        authors:['Malsententia'],
+        setting:'scriptNodePEPEnabled',
+        css:['http://radio.berrytube.tv/plugins/pep/pep.css','http://radio.berrytube.tv/plugins/pep/multipleselectbox.css'],
+        js:['http://radio.berrytube.tv/plugins/pep/ZeroClipboard.min.js','http://radio.berrytube.tv/plugins/pep/pep.js','http://radio.berrytube.tv/plugins/pep/jquery.multipleselectbox-min.js']
+    }
+
