@@ -2,7 +2,28 @@
 //Author:  Malsententia
 //Desc.:   Provides playlist item alerts and estimated play times
 var PEP = {};
-PEP.rootDir = 'http://radio.berrytube.tv/plugins/pep/';
+
+//Yay no more need to set the location
+var getScriptLocation = function() {
+  var fileName = "fileName", stack = "stack", stackTrace = "stacktrace",loc = null;
+  var matcher = function(stack, matchedLoc) { return loc = matchedLoc; };
+  try {0();} catch (ex) {
+    if(fileName in ex) { // Firefox
+      loc = ex[fileName];
+    } else if(stackTrace in ex) { // Opera
+      ex[stackTrace].replace(/called from line \d+, column \d+ in (.*):/gm, matcher);
+    } else if(stack in ex) { // WebKit, Blink and IE10
+      ex[stack].replace(/at.*?\(?(\S+):\d+:\d+\)?$/g, matcher);
+    }
+    return loc;
+  }
+};
+PEP.rootDir = getScriptLocation().match(/.*?(?=pep.js)/)[0];
+if(localStorage.scriptNodePEPEnabled !== "true"){
+  //loading from bookmarklet, get the css
+  $('<link/>', {rel: 'stylesheet', href: PEP.rootDir+'multipleselectbox.css?'}).appendTo('head');
+  $('<link/>', {rel: 'stylesheet', href: PEP.rootDir+'pep.css?'+Math.random()}).appendTo('head');
+}
 
 $.getScript(PEP.rootDir+'jquery.multipleselectbox-min.js');
 $.getScript(PEP.rootDir+'ZeroClipboard.min.js',zcConf);
