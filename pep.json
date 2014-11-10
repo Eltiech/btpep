@@ -5,6 +5,6 @@
         authors:['Malsententia'],
         setting:'scriptNodePEPEnabled',
         css:['http://radio.berrytube.tv/plugins/pep/pep.css','http://radio.berrytube.tv/plugins/pep/multipleselectbox.css'],
-        js:['http://radio.berrytube.tv/plugins/pep/ZeroClipboard.min.js','http://radio.berrytube.tv/plugins/pep/pep.js','http://radio.berrytube.tv/plugins/pep/jquery.multipleselectbox-min.js']
+        js:['http://radio.berrytube.tv/plugins/pep/pep.js']
     }
 

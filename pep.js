@@ -4,16 +4,9 @@
 var PEP = {};
 PEP.rootDir = 'http://radio.berrytube.tv/plugins/pep/';
 
+$.getScript(PEP.rootDir+'jquery.multipleselectbox-min.js');
+$.getScript(PEP.rootDir+'ZeroClipboard.min.js',zcConf);
 
-if(localStorage.scriptNodePEPEnabled !== "true"){
-  //must be loading from bookmarklet, get what we need.
-  $('<link/>', {rel: 'stylesheet', href: PEP.rootDir+'multipleselectbox.css?'}).appendTo('head');
-  $.getScript(PEP.rootDir+'jquery.multipleselectbox-min.js');
-  $.getScript(PEP.rootDir+'ZeroClipboard.min.js',zcConf);
-  $('<link/>', {rel: 'stylesheet', href: PEP.rootDir+'pep.css?'+Math.random()}).appendTo('head');
-} else {
-  zcConf();
-}
 function zcConf(){
   ZeroClipboard.config( {
     swfPath: PEP.rootDir+"ZeroClipboard.swf",
