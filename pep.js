@@ -26,46 +26,50 @@ if(localStorage.scriptNodePEPEnabled !== "true"){
 }
 
 $.getScript(PEP.rootDir+'jquery.multipleselectbox-min.js');
-$.getScript(PEP.rootDir+'ZeroClipboard.min.js',zcConf);
+//$.getScript(PEP.rootDir+'ZeroClipboard.min.js',zcConf);
 
 function zcConf(){
   ZeroClipboard.config( {
     swfPath: PEP.rootDir+"ZeroClipboard.swf",
     flashLoadTimeout: 2000
   });
-    var zctester = $('<div/>').attr({
-      id:'zctester',
-      'data-clipboard-text':'tester'      
-    }).appendTo(document.body);
-    var zctestclient = new ZeroClipboard(zctester);
-    ZeroClipboard.focus($('#zctester').get(0))
-    ZeroClipboard.on("error", function(e) {
-      if(e.name == "flash-unavailable"){
-        zctestclient.destroy();
-        $(zctester).remove();
-      }
-  });
+    //var zctester = $('<div/>').attr({
+      //id:'zctester',
+      //'data-clipboard-text':'tester'      
+    //}).appendTo(document.body);
+    //var zctestclient = new ZeroClipboard(zctester);
+    //ZeroClipboard.focus($('#zctester').get(0))
+    //ZeroClipboard.on("error", function(e) {
+      //console.log(e);
+      //if(e.name == "flash-unavailable"){
+        //zctestclient.destroy();
+        //$(zctester).remove();
+      //}
+  //});
   //hacky, but it keeps the context menu from disappearing if the right
   //mouse button is let up while over the "Copy To Clipboard" button,
   //which, with zeroclipboard, is actually covered by a transparent
   //overlay, that isn't part of the context box.
   //if I'm derping and there's a better way, lemme know.
-  $(document).bind("mouseup.zeroclipNormWindows",function (e){
-    var mupevents = jQuery._data( document, "events" ).mouseup;
-    for(var i=0;i<mupevents.length;i++){
-      if(mupevents[i].namespace == "rmWindows"){
-        e.oldrmwin = mupevents[i].handler;
-        mupevents[i].handler = function(f){
-          if ($('#global-zeroclipboard-html-bridge').is(':hover')) {
-            //we're over the overlay, don't close, still unbind
-            $(document).unbind("mouseup.rmWindows");
-          } else {
-            e.oldrmwin(f);
-          }
-        };
-      }
-    }
-  });
+  //$(document).bind("mouseup.zeroclipNormWindows",function (e){
+    //var mupevents = jQuery._data( document, "events" ).mouseup;
+    //for(var i=0;i<mupevents.length;i++){
+      //if(mupevents[i].namespace == "rmWindows"){
+        //e.oldrmwin = mupevents[i].handler;
+        //mupevents[i].handler = function(f){
+          //if ($('#global-zeroclipboard-html-bridge').is(':hover')) {
+            //console.log("go here");
+            ////we're over the overlay, don't close, still unbind
+            //$(document).unbind("mouseup.rmWindows");
+            //e.oldrmwin = undefined;
+          //} else {
+            //console.log("got here");
+            //e.oldrmwin(f);
+          //}
+        //};
+      //}
+    //}
+  //});
 }
 PEP.unknown = '??:??';//displayed when times are incalculable due to an item of indeterminate length
 PEP.JAM = new Audio(PEP.rootDir+'JAM.wav');
@@ -435,15 +439,21 @@ addVideoControls = function(entry,optionList){
   if(vlink){
     var clipBtn = $("<div/>").addClass("button").appendTo($("<li/>").appendTo(optionList));
     var clipSpn = $("<span/>").text("Copy Link to Clipboard").appendTo(clipBtn);
-    if(PEP.zc()){
+    if(false && PEP.zc()){
       clipBtn.attr('data-clipboard-text',vlink);
       var client = new ZeroClipboard(clipBtn);
       client.on("copy",function(event){
         $(event.target).children('span').text("Link Copied!");
+        console.log("Should be copied");
         //this removal doesn't work, cause clicking the swf closes the dialog anyway.
         //but keeping it incase that somehow changes
         setTimeout(function(){$(event.target).parents('.dialogWindow').remove();},1000);
       });
+      client.on( 'error', function(event) {
+        console.log("zero clipboard error:",event);
+        client.destroy();
+        ZeroClipboard.destroy();
+        });
       client.on("afterCopy",function(event){
         client.destroy();
       });
@@ -460,7 +470,8 @@ addVideoControls = function(entry,optionList){
           'font-size':t.css('font-size'),
         }).val(vlink);
         $(this).replaceWith(box);
-        $("<span/>").addClass('copyCaption').text("Sorry, Flash is needed to change the clipboard. Have a text box!")
+        //$("<span/>").addClass('copyCaption').text("Sorry, Flash is needed to change the clipboard. Have a text box!")
+        $("<span/>").addClass('copyCaption').text("Press Ctrl+C (The Flash auto-copier is disabled for now)")
           .insertAfter(box).before('<br>');
         box.select();
         box.click(function(){
