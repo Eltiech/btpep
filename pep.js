@@ -94,6 +94,7 @@ PEP.milTime = (localStorage.PEPmilTime === "true");
 
 PEP.zc = function(){//well shit, this doesn't seem to notice when flash is disabled on chromium
   return (typeof ZeroClipboard !== "undefined") && 
+  $.getScript(PEP.rootDir+'ZeroClipboard.min.js',zcConf);
     (ZeroClipboard.state().flash.disabled !== true) && !ZeroClipboard.state().flash.deactivated;
 }
 
@@ -603,4 +604,14 @@ PEP.bench.fvc = function(data){
     console.log((PEP.bench.now-ACTIVE.startTime)/1000.0)}
   ,1000);
 };*/
+  var oplaylistsize=$("#playlist").height();
+  $(document).bind("mouseup.checkplaylistresize",function (e){
+    if($("#playlist").height()!==oplaylistsize){
+      oplaylistsize = $("#playlist").height();
+      smartRefreshScrollbar();
+    }
+  });
+
+
+
 // vim:ts=2:sw=2:sts=2

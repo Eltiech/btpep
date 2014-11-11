@@ -248,3 +248,60 @@ animation: pulse 3s ease-in-out infinite;
     max-height:100% !important;
 }
 
+/*fix accidental selection gliching*/
+#playlist {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  z-index: 1;
+  overflow-y:hidden;
+  width: auto !important;
+  resize: vertical;
+  padding-bottom: 0px;
+  position: relative;
+  min-height:379px
+  }
+
+
+#playlist * {
+  resize: none; }
+#plstats {
+    position:absolute;
+    bottom:0px;
+    padding:3px 10px 0px 3px;
+    width: -moz-calc(100% - 20px) !important;
+    width: -o-calc(100% - 20px) !important;
+    width: -webkit-calc(100% - 20px) !important;
+    width: calc(100% - 20px) !important;
+}
+#plstats {pointer-events: none;}
+#plstats * {pointer-events: auto;}
+#searchbox {pointer-events: none}
+#searchbox * {pointer-events: auto;}
+#plstats .totalVideos{
+    position:static;
+    float:left;
+}
+#searchbox {
+  background:inherit !important;
+  position: absolute;
+  width: 100%;
+  bottom: 1.3em; }
+
+#playlist .viewport {
+  min-height:350px;
+  width: -moz-calc(100% - 20px) !important;
+  width: -o-calc(100% - 20px) !important;
+  width: -webkit-calc(100% - 20px) !important;
+  width: calc(100% - 20px) !important;
+  height: -moz-calc(100% - 29px) !important;
+  height: -o-calc(100% - 29px) !important;
+  height: -webkit-calc(100% - 29px) !important;
+  height: calc(100% - 29px) !important;
+   }
+  #playlist .viewport .overview, #playlist .viewport .overview ul {
+    width: 100%; }
+    #searchbox{background-color:none}
