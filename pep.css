@@ -272,10 +272,10 @@ animation: pulse 3s ease-in-out infinite;
     position:absolute;
     bottom:0px;
     padding:0px 10px 0px 3px;
-    width: -moz-calc(100% - 20px) !important;
-    width: -o-calc(100% - 20px) !important;
-    width: -webkit-calc(100% - 20px) !important;
-    width: calc(100% - 20px) !important;
+    width: -moz-calc(100% - 15px) !important;
+    width: -o-calc(100% - 15px) !important;
+    width: -webkit-calc(100% - 15px) !important;
+    width: calc(100% - 15px) !important;
 }
 #plstats {pointer-events: none;}
 #plstats * {pointer-events: auto;}
@@ -304,4 +304,24 @@ animation: pulse 3s ease-in-out infinite;
    }
   #playlist .viewport .overview, #playlist .viewport .overview ul {
     width: 100%; }
-    #searchbox{background-color:none}
+#searchbox{background-color:none}
+
+/*chat only forces the the scrollbar over the resize handle. Let's fix that*/
+/* throw in body as a selector, weight intensifies!*/
+body #playlist .scrollbar{
+        height: -moz-calc(100% - 27px) !important;
+        height: -o-calc(100% - 27px) !important;
+        height: -webkit-calc(100% - 27px) !important;
+        height: calc(100% - 27px) !important;
+        position:absolute !important;
+        right:0px !important;
+        top:0px !important;
+        float:none !important;
+}
+body #playlist .track{
+    float:none !important;
+ }
+body #leftpane{
+height:auto !important;
+min-height: 0 !important;
+ }
