@@ -262,7 +262,7 @@ animation: pulse 3s ease-in-out infinite;
   resize: vertical;
   padding-bottom: 0px;
   position: relative;
-  min-height:379px
+  min-height:377px
   }
 
 
@@ -271,7 +271,7 @@ animation: pulse 3s ease-in-out infinite;
 #plstats {
     position:absolute;
     bottom:0px;
-    padding:3px 10px 0px 3px;
+    padding:0px 10px 0px 3px;
     width: -moz-calc(100% - 20px) !important;
     width: -o-calc(100% - 20px) !important;
     width: -webkit-calc(100% - 20px) !important;
@@ -297,10 +297,10 @@ animation: pulse 3s ease-in-out infinite;
   width: -o-calc(100% - 20px) !important;
   width: -webkit-calc(100% - 20px) !important;
   width: calc(100% - 20px) !important;
-  height: -moz-calc(100% - 29px) !important;
-  height: -o-calc(100% - 29px) !important;
-  height: -webkit-calc(100% - 29px) !important;
-  height: calc(100% - 29px) !important;
+  height: -moz-calc(100% - 27px) !important;
+  height: -o-calc(100% - 27px) !important;
+  height: -webkit-calc(100% - 27px) !important;
+  height: calc(100% - 27px) !important;
    }
   #playlist .viewport .overview, #playlist .viewport .overview ul {
     width: 100%; }
