@@ -2,7 +2,6 @@
 //Author:  Malsententia
 //Desc.:   Provides playlist item alerts and estimated play times
 var PEP = {};
-
 //Yay no more need to set the location
 var getScriptLocation = function() {
   var fileName = "fileName", stack = "stack", stackTrace = "stacktrace",loc = null;
@@ -19,57 +18,59 @@ var getScriptLocation = function() {
   }
 };
 PEP.rootDir = getScriptLocation().match(/.*?(?=pep.js)/)[0];
+//if loading from bookmarklet, get the css
 if(localStorage.scriptNodePEPEnabled !== "true"){
-  //loading from bookmarklet, get the css
   $('<link/>', {rel: 'stylesheet', href: PEP.rootDir+'multipleselectbox.css?'}).appendTo('head');
   $('<link/>', {rel: 'stylesheet', href: PEP.rootDir+'pep.css?'+Math.random()}).appendTo('head');
 }
 
+$.getScript(PEP.rootDir+'ZeroClipboard.min.js',zcConf);
 $.getScript(PEP.rootDir+'jquery.multipleselectbox-min.js');
-//$.getScript(PEP.rootDir+'ZeroClipboard.min.js',zcConf);
 
 function zcConf(){
   ZeroClipboard.config( {
     swfPath: PEP.rootDir+"ZeroClipboard.swf",
-    flashLoadTimeout: 2000
+    flashLoadTimeout: 2000,
+    trustedDomains: window.location.host ? [window.location.host] : [],
+    bubbleEvents: true,
+    forceHandCursor: true
   });
-    //var zctester = $('<div/>').attr({
-      //id:'zctester',
-      //'data-clipboard-text':'tester'      
-    //}).appendTo(document.body);
-    //var zctestclient = new ZeroClipboard(zctester);
-    //ZeroClipboard.focus($('#zctester').get(0))
-    //ZeroClipboard.on("error", function(e) {
-      //console.log(e);
-      //if(e.name == "flash-unavailable"){
-        //zctestclient.destroy();
-        //$(zctester).remove();
-      //}
-  //});
+  PEP.zcclient = new ZeroClipboard();
+  PEP.zcclient.on("copy",function(event){
+    $(event.target).children('span').text("Link Copied!");
+    //this
+    setTimeout(function(){$(event.target).parents('.dialogWindow').remove();},1500);
+  });
+  PEP.zcclient.on("afterCopy",function(event){
+    PEP.zcclient.unclip();
+  });
+  PEP.zcclient.on("error",function(event){
+    console.log("ZeroClipboard Error",event);
+  });
   //hacky, but it keeps the context menu from disappearing if the right
   //mouse button is let up while over the "Copy To Clipboard" button,
   //which, with zeroclipboard, is actually covered by a transparent
   //overlay, that isn't part of the context box.
   //if I'm derping and there's a better way, lemme know.
-  //$(document).bind("mouseup.zeroclipNormWindows",function (e){
-    //var mupevents = jQuery._data( document, "events" ).mouseup;
-    //for(var i=0;i<mupevents.length;i++){
-      //if(mupevents[i].namespace == "rmWindows"){
-        //e.oldrmwin = mupevents[i].handler;
-        //mupevents[i].handler = function(f){
-          //if ($('#global-zeroclipboard-html-bridge').is(':hover')) {
-            //console.log("go here");
-            ////we're over the overlay, don't close, still unbind
-            //$(document).unbind("mouseup.rmWindows");
-            //e.oldrmwin = undefined;
-          //} else {
-            //console.log("got here");
-            //e.oldrmwin(f);
-          //}
-        //};
-      //}
-    //}
-  //});
+  $(document).bind("mouseup.zeroclipNormWindows",function (e){
+    var mupevents = jQuery._data( document, "events" ).mouseup;
+    for(var i=0;i<mupevents.length;i++){
+      if(mupevents[i].namespace == "rmWindows"){
+        e.oldrmwin = mupevents[i].handler;
+        mupevents[i].handler = function(f){
+          if ($('#global-zeroclipboard-html-bridge').is(':hover')) {
+            console.log("go here");
+            //we're over the overlay, don't close, still unbind
+            $(document).unbind("mouseup.rmWindows");
+            e.oldrmwin = undefined;
+          } else {
+            console.log("got here");
+            e.oldrmwin(f);
+          }
+        };
+      }
+    }
+  });
 }
 PEP.unknown = '??:??';//displayed when times are incalculable due to an item of indeterminate length
 PEP.JAM = new Audio(PEP.rootDir+'JAM.wav');
@@ -98,7 +99,7 @@ PEP.milTime = (localStorage.PEPmilTime === "true");
 
 PEP.zc = function(){//well shit, this doesn't seem to notice when flash is disabled on chromium
   return (typeof ZeroClipboard !== "undefined") && 
-  $.getScript(PEP.rootDir+'ZeroClipboard.min.js',zcConf);
+//  $.getScript(PEP.rootDir+'ZeroClipboard.min.js',zcConf);
     (ZeroClipboard.state().flash.disabled !== true) && !ZeroClipboard.state().flash.deactivated;
 }
 
@@ -184,7 +185,7 @@ PEP.initButts = function(){
         //if(PEP.loading)
           //$(this).addClass('loading');
         //else
-          //$(this).removeClass('loading');
+          //$(this).removeClass('loading')p;
         PEP.toggleTimes();
         PEP.pauseCalcs=!$('#plul').hasClass('showStarts');
         if(!PEP.pauseCalcs)
@@ -437,26 +438,15 @@ addVideoControls = function(entry,optionList){
       break;
   }
   if(vlink){
-    var clipBtn = $("<div/>").addClass("button").appendTo($("<li/>").appendTo(optionList));
+    var clipBtn = $("<div/>").addClass("button").attr('data-clipboard-text',vlink).appendTo($("<li/>").appendTo(optionList));
+    //var clipSpn = $("<span/>").text("Copy Link to Clipboard").appendTo(clipBtn);
     var clipSpn = $("<span/>").text("Copy Link to Clipboard").appendTo(clipBtn);
-    if(false && PEP.zc()){
-      clipBtn.attr('data-clipboard-text',vlink);
-      var client = new ZeroClipboard(clipBtn);
-      client.on("copy",function(event){
-        $(event.target).children('span').text("Link Copied!");
-        console.log("Should be copied");
-        //this removal doesn't work, cause clicking the swf closes the dialog anyway.
-        //but keeping it incase that somehow changes
-        setTimeout(function(){$(event.target).parents('.dialogWindow').remove();},1000);
-      });
-      client.on( 'error', function(event) {
-        console.log("zero clipboard error:",event);
-        client.destroy();
-        ZeroClipboard.destroy();
-        });
-      client.on("afterCopy",function(event){
-        client.destroy();
-      });
+    if(PEP.zc()){
+      PEP.zcclient.clip(clipBtn);
+      clipBtn.on("remove", function () {
+        //this shouldn't be needed but it think it didn't get removed properly once. maybe.
+        PEP.zcclient.unclip(clipBtn);
+      })
     }else{
       clipBtn.click(function(e){
         if(e.target.tagName == "SPAN")
@@ -470,8 +460,8 @@ addVideoControls = function(entry,optionList){
           'font-size':t.css('font-size'),
         }).val(vlink);
         $(this).replaceWith(box);
-        //$("<span/>").addClass('copyCaption').text("Sorry, Flash is needed to change the clipboard. Have a text box!")
-        $("<span/>").addClass('copyCaption').text("Press Ctrl+C (The Flash auto-copier is disabled for now)")
+        //$("<span/>").addClass('copyCaption').text("Press Ctrl+C (The Flash auto-copier is disabled for now)")
+        $("<span/>").addClass('copyCaption').text("Sorry, Flash is needed to change the clipboard. Have a text box!")
           .insertAfter(box).before('<br>');
         box.select();
         box.click(function(){

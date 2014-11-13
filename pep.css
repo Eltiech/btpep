@@ -24,10 +24,10 @@
 50% {border-color: #ed27ff;}
 75% {border-color: #d400eb;}
 100% {border-color: #732C7B;}}
-#global-zeroclipboard-flash-bridge, #global-zeroclipboard-flash-bridge:focus,#global-zeroclipboard-flash-bridge::-moz-focus-inner, #global-zeroclipboard-flash-bridge:active {
+/*#global-zeroclipboard-flash-bridge, #global-zeroclipboard-flash-bridge:focus,#global-zeroclipboard-flash-bridge::-moz-focus-inner, #global-zeroclipboard-flash-bridge:active {
     outline:0 !important;
     border:none !important;
-}
+}*/
 .copyCaption{
     font-size:9px;
     margin:0px 3px;
@@ -261,10 +261,10 @@ animation: pulse 3s ease-in-out infinite;
 .alertNote{
     font-size:70%;
 }
-#global-zeroclipboard-html-bridge{
+/*#global-zeroclipboard-html-bridge{
     max-width:100% !important;
     max-height:100% !important;
-}
+}*/
 
 /*fix accidental selection gliching*/
 #playlist {
