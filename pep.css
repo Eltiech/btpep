@@ -36,7 +36,7 @@
     display:inline-block;
 }
 body.admin #playlist ul li div.title,
-body.mod #playlist ul li div.title,
+body.assistant #playlist ul li div.title,
 body.berry #playlist ul li div.title
 {
     width:-webkit-calc(100% - 110px);
@@ -64,14 +64,14 @@ body.berry #playlist ul li div.title
     width:calc(100% - 90px);
 }
 body.admin #playlist ul li.alarm:not(.history) div.title,
-body.mod #playlist ul li.alarm:not(.history) div.title,
+body.assistant #playlist ul li.alarm:not(.history) div.title,
 body.berry #playlist ul li.alarm:not(.history) div.title{
     width:-webkit-calc(100% - 100px);
     width:-moz-calc(100% - 100px);
     width:calc(100% - 100px);
 }
 body.admin #playlist ul li.alarm:not(.history) div.colorTag[style^='display'] ~ div.title,
-body.mod #playlist ul li.alarm:not(.history) div.colorTag[style^='display'] ~ div.title,
+body.assistant #playlist ul li.alarm:not(.history) div.colorTag[style^='display'] ~ div.title,
 body.berry #playlist ul li.alarm:not(.history) div.colorTag[style^='display'] ~ div.title{
     width:-webkit-calc(100% - 110px);
     width:-moz-calc(100% - 110px);
@@ -88,14 +88,14 @@ body.berry #playlist ul li.alarm:not(.history) div.colorTag[style^='display'] ~ 
     width:calc(100% - 120px);
 }
 body.admin #playlist ul.showStarts li:not(.history) div.title,
-body.mod #playlist ul.showStarts li:not(.history) div.title,
+body.assistant #playlist ul.showStarts li:not(.history) div.title,
 body.berry #playlist ul.showStarts li:not(.history) div.title{
     width:-webkit-calc(100% - 130px);
     width:-moz-calc(100% - 130px);
     width:calc(100% - 130px);
 }
 body.admin #playlist ul.showStarts li:not(.history) div.colorTag[style^='display'] ~ div.title,
-body.mod #playlist ul.showStarts li:not(.history) div.colorTag[style^='display'] ~ div.title,
+body.assistant #playlist ul.showStarts li:not(.history) div.colorTag[style^='display'] ~ div.title,
 body.berry #playlist ul.showStarts li:not(.history) div.colorTag[style^='display'] ~ div.title{
     width:-webkit-calc(100% - 140px);
     width:-moz-calc(100% - 140px);
