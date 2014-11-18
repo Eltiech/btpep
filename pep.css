@@ -276,7 +276,7 @@ animation: pulse 3s ease-in-out infinite;
   user-select: none;
   z-index: 1;
   overflow-y:hidden;
-  width: auto !important;
+  width: 100%;
   resize: vertical;
   padding-bottom: 0px;
   position: relative;
