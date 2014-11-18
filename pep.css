@@ -343,3 +343,4 @@ body #leftpane{
 height:auto !important;
 min-height: 0 !important;
  }
+#playlist .viewport .overview{padding-bottom:20px}
