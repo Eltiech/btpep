@@ -48,7 +48,7 @@ body.berry #playlist ul li div.title
     width:-moz-calc(100% - 90px);
     width:calc(100% - 90px);
 }
-#playlist ul li div.colorTag[style^='display'] ~ div.title{
+#playlist ul li div.colorTag[style*=block] ~ div.title{
     width:-webkit-calc(100% - 100px);
     width:-moz-calc(100% - 100px);
     width:calc(100% - 100px);
@@ -58,7 +58,7 @@ body.berry #playlist ul li div.title
     width:-moz-calc(100% - 80px);
     width:calc(100% - 80px);
 }
-#playlist ul li.alarm:not(.history) div.colorTag[style^='display'] ~ div.title{
+#playlist ul li.alarm:not(.history) div.colorTag[style*=block] ~ div.title{
     width:-webkit-calc(100% - 90px);
     width:-moz-calc(100% - 90px);
     width:calc(100% - 90px);
@@ -70,9 +70,9 @@ body.berry #playlist ul li.alarm:not(.history) div.title{
     width:-moz-calc(100% - 100px);
     width:calc(100% - 100px);
 }
-body.admin #playlist ul li.alarm:not(.history) div.colorTag[style^='display'] ~ div.title,
-body.assistant #playlist ul li.alarm:not(.history) div.colorTag[style^='display'] ~ div.title,
-body.berry #playlist ul li.alarm:not(.history) div.colorTag[style^='display'] ~ div.title{
+body.admin #playlist ul li.alarm:not(.history) div.colorTag[style*=block] ~ div.title,
+body.assistant #playlist ul li.alarm:not(.history) div.colorTag[style*=block] ~ div.title,
+body.berry #playlist ul li.alarm:not(.history) div.colorTag[style*=block] ~ div.title{
     width:-webkit-calc(100% - 110px);
     width:-moz-calc(100% - 110px);
     width:calc(100% - 110px);
@@ -82,7 +82,7 @@ body.berry #playlist ul li.alarm:not(.history) div.colorTag[style^='display'] ~ 
     width:-moz-calc(100% - 110px);
     width:calc(100% - 110px);
 }
-#playlist ul.showStarts li:not(.history) div.colorTag[style^='display'] ~ div.title{
+#playlist ul.showStarts li:not(.history) div.colorTag[style*=block] ~ div.title{
     width:-webkit-calc(100% - 120px);
     width:-moz-calc(100% - 120px);
     width:calc(100% - 120px);
@@ -94,9 +94,9 @@ body.berry #playlist ul.showStarts li:not(.history) div.title{
     width:-moz-calc(100% - 130px);
     width:calc(100% - 130px);
 }
-body.admin #playlist ul.showStarts li:not(.history) div.colorTag[style^='display'] ~ div.title,
-body.assistant #playlist ul.showStarts li:not(.history) div.colorTag[style^='display'] ~ div.title,
-body.berry #playlist ul.showStarts li:not(.history) div.colorTag[style^='display'] ~ div.title{
+body.admin #playlist ul.showStarts li:not(.history) div.colorTag[style*=block] ~ div.title,
+body.assistant #playlist ul.showStarts li:not(.history) div.colorTag[style*=block] ~ div.title,
+body.berry #playlist ul.showStarts li:not(.history) div.colorTag[style*=block] ~ div.title{
     width:-webkit-calc(100% - 140px);
     width:-moz-calc(100% - 140px);
     width:calc(100% - 140px);
@@ -276,7 +276,7 @@ animation: pulse 3s ease-in-out infinite;
   user-select: none;
   z-index: 1;
   overflow-y:hidden;
-  width: 100%;
+  width: auto !important;
   resize: vertical;
   padding-bottom: 0px;
   position: relative;
